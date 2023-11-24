@@ -36,7 +36,7 @@
                 // If a show is found, get its ID and fetch availability data
                 if (firstShow) {
                     const showId = firstShow.id;
-                    const availabilityResponse = await fetch(`https://api.themoviedb.org/3/tv/${showId}/watch/providers?api_key=cd8819123f6dc77e58caf47bd9b25c44`);
+                    const availabilityResponse = await fetch(`https://api.themoviedb.org/3/tv/${showId}/watch/providers?api_key=9ad6e393df1c4b0f1419750ed91640cd`);
                     const availabilityData = await availabilityResponse.json();
 
                     displayData(availabilityData);
