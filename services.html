@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Availability Search</title>
+<link rel="stylesheet" href="servicestyles.css">
+
+</head>
+<body>
+    <h1>Show Availability Search</h1>
+
+    <input type="text" id="searchInput" placeholder="Enter a show name">
+    <button onclick="searchShow()">Search</button>
+
+    <ul class="country-list" id="countryList"></ul>
+
+    <script>
+        // Function to search for a show
+        async function searchShow() {
+            const showName = document.getElementById('searchInput').value;
+
+            // If no show name is provided, do nothing
+            if (!showName) {
+                return;
+            }
+
+            try {
+                // Fetch data from the API
+                const response = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=cd8819123f6dc77e58caf47bd9b25c44&query=${encodeURIComponent(showName)}`);
+                const data = await response.json();
+
+                // Get the first show from the search results
+                const firstShow = data.results[0];
+
+                // If a show is found, get its ID and fetch availability data
+                if (firstShow) {
+                    const showId = firstShow.id;
+                    const availabilityResponse = await fetch(`https://api.themoviedb.org/3/tv/${showId}/watch/providers?api_key=cd8819123f6dc77e58caf47bd9b25c44`);
+                    const availabilityData = await availabilityResponse.json();
+
+                    displayData(availabilityData);
+                } else {
+                    // If no show is found, display a message
+                    alert('No results found for the entered show name.');
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // Function to display data on the HTML page
+        function displayData(availabilityData) {
+            const countryListElement = document.getElementById('countryList');
+            countryListElement.innerHTML = ''; // Clear previous results
+
+            // Iterate over each country in the results
+            Object.entries(availabilityData.results).forEach(([countryCode, countryData]) => {
+                const countryItemElement = document.createElement('li');
+                countryItemElement.classList.add('country-item');
+
+                // Create a heading for the country
+                const countryHeading = document.createElement('h2');
+                countryHeading.textContent = countryCode;
+                countryItemElement.appendChild(countryHeading);
+
+                // Create a list for providers in the country
+                const providerListElement = document.createElement('ul');
+                providerListElement.classList.add('provider-list');
+
+                // Iterate over each provider in the country
+                (countryData.flatrate || []).forEach(providerData => {
+                    const providerItemElement = document.createElement('li');
+                    providerItemElement.classList.add('provider-item');
+
+                    // Create an image element for the provider logo
+                    const providerLogo = document.createElement('img');
+                    providerLogo.src = `https://www.themoviedb.org/t/p/original${providerData.logo_path}`;
+                    providerLogo.alt = `${providerData.provider_name} Logo`;
+                    providerLogo.classList.add('provider-logo');
+                    providerItemElement.appendChild(providerLogo);
+
+                    // Create a link to the provider's page
+                    const providerLink = document.createElement('a');
+    providerLink.href = providerData.link;
+    providerLink.target = '_blank'; // Open link in a new tab
+    providerLink.textContent = providerData.provider_name; // Use textContent instead of innerHTML
+    providerItemElement.appendChild(providerLink);
+
+    providerListElement.appendChild(providerItemElement);
+                });
+
+                countryItemElement.appendChild(providerListElement);
+                countryListElement.appendChild(countryItemElement);
+            });
+        }
+    </script>
+</body>
+</html>

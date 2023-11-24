@@ -1,0 +1,34 @@
+/* seasonstyles.css */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    background: linear-gradient(45deg, #3498db, #8e44ad); /* Adjust colors as needed */
+    font-family: 'Arial', sans-serif;
+  }
+  
+  #results-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px; /* Adjust as needed */
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 50px;
+  }
+  
+  /* Add responsiveness */
+  @media (max-width: 600px) {
+    #results-container {
+      max-width: 90%;
+    }
+  }
+  

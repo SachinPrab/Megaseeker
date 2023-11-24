@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ratingstyles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Top Rated TV Shows</title>
+</head>
+<body>
+<h1>Must-Watch TV: Top Ratings</h1>
+<div id="tvShowsList"></div>
+
+<script>
+    // API endpoint for top-rated TV shows
+    const apiUrl = 'https://api.themoviedb.org/3/tv/top_rated?api_key=cd8819123f6dc77e58caf47bd9b25c44';
+
+    // Get the container element
+    const tvShowsListContainer = document.getElementById('tvShowsList');
+
+    // Make an asynchronous request to the TMDB API
+    async function fetchTopRatedTVShows() {
+        try {
+            const response = await fetch(apiUrl);
+            const tvShowsData = await response.json();
+
+            // Loop through the TV shows data and create HTML elements
+            tvShowsData.results.forEach(tvShow => {
+                const tvShowElement = document.createElement('div');
+                tvShowElement.classList.add('tv-show');
+
+                // Display TV show information
+                tvShowElement.innerHTML = `
+                    <h2>${tvShow.name}</h2>
+                    <img src="https://image.tmdb.org/t/p/w200${tvShow.poster_path}" alt="${tvShow.name} Poster">
+                    <p><strong>Rating:</strong> ${tvShow.vote_average}</p>
+                    <p><strong>Overview:</strong> ${tvShow.overview}</p>
+                `;
+                // Append the TV show element to the container
+                tvShowsListContainer.appendChild(tvShowElement);
+            });
+        } catch (error) {
+            console.error('Error fetching top-rated TV shows:', error);
+        }
+    }
+
+    // Call the function to fetch and display top-rated TV shows
+    fetchTopRatedTVShows();
+</script>
+
+</body>
+</html>

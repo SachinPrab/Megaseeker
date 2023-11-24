@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" width="device-width" inital-scale="1.0">
+<meta charset="UTF-8">
+<title>Sign Up Page</title>
+<link rel=""stylesheet" href="signup.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+    <form action="/signup" method="POST">
+        <h1>Welcome to the Megaseeker Sign Up Page</h1>
+        <p>
+            <label for="name">Full Name:</label><br>
+            <input type="text" name="name" id="name" placeholder="enter your name" required><br><br>
+            <label for="email">Email:</label><br>
+            <input type="email" name="email" id="email" placeholder="enter your email" required><br><br>
+            <label for="phone">Phone Number:</label><br>
+            <input type="tel" name="phone" id="phone" placeholder="enter your phone number" required><br><br>
+            <label for="address">Address:</label><br>
+            <input type="text" name="address" id="address" placeholder="enter your address" required><br><br>
+            <label for="dateofbirth">Date of Birth:</label><br>
+            <input type="date" name="dateofbirth" id="dateofbirth" required><br><br>
+            <label for="username">Username:</label><br>
+            <input type="text" name="username" id="username" placeholder="enter your username" required><br><br>
+            <label for="password">Password</label><br>
+            <input type="password" name="password" id="password" placeholder="enter your password" required><br><br>
+            <label for="Gender">Gender:</label><br>
+            <input type="radio" name="gender" id="male" value="male"> Male<br>
+            <input type="radio" name="gender" id="female" value="female"> Female<br>
+            <input type="radio" name="gender" id="other" value="other"> Other<br>
+            <label for="country">Country</label><br>
+            <input type="text" name="country" id="country" placeholder="enter your country" required><br><br>
+            <label for="city">City:</label><br>
+            <input type="text" name="city" id="city" placeholder="enter your city" required><br><br>
+            <label for="profilepicture">Profile Picture/Avatar</label><br>
+            <input type="file" name="profilepicture" id="profilepicture" required><br><br>
+            <label for="favouritegenres">Favourite Genres</label><br>
+            <input type="checkbox" name="favouritegenres" id="action" value="action"> Action<br>
+            <input type="checkbox" name="favouritegenres" id="comedy" value="comedy"> Comedy<br>
+            <input type="checkbox" name="favouritegenres" id="drama" value="drama"> Drama<br>
+            <input type="checkbox" name="favouritegenres" id="horror" value="horror"> Horror<br>
+            <input type="checkbox" name="favouritegenres" id="romance" value="romance"> Romance<br>
+            <input type="checkbox" name="favouritegenres" id="sci-fi" value="sci-fi"> Sci-fi<br>
+            <input type="checkbox" name="favouritegenres" id="thriller" value="thriller"> Thriller<br>
+            <input type="checkbox" name="favouritegenres" id="fantasy" value="fantasy"> Fantasy<br>
+            <input type="checkbox" name="favouritegenres" id="mystery" value="mystery"> Mystery<br>
+            <input type="checkbox" name="favouritegenres" id="adventure" value="adventure"> Adventure<br>
+            <input type="checkbox" name="favouritegenres" id="war" value="war">War<br>
+            <input type="checkbox" name="favouritegenres" id="sport" value="sport"> Sport<br>
+            <input type="checkbox" name="favouritegenres" id="music" value="music"> Music<br>
+            <input type="checkbox" name="favouritegenres" id="anime" value="anime"> Anime <br>
+            <input type="checkbox" name="favouritegenres" id="western" value="western"> Western<br><br>
+            <input type="checkbox" name="termsandconditions" id="tandc" value="tandc"> I agree to the <a href="termsandconditions.html">Terms and Conditions</a><br><br>
+            <button class="btn btn-primary" placeholder="Submit">Submit</button>
+        </p>
+    </form> 
+</body>
+</html>

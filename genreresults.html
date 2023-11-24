@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter TV Shows</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="genrestyles.css">
+</head>
+<body>
+    <div id="filter-container">
+    <h1>Filter TV Shows by Genres</h1>
+    <label for="28">Action</label>
+    <input type="checkbox" id="10759" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+    <label for="adventure">Adventure</label>
+    <input type="checkbox" id="10759" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+    <label for="28">Animation</label>
+    <input type="checkbox" id="16" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+    <label for="18">Drama</label>
+    <input type="checkbox" id="18" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+    <label for="35">Comedy</label>
+    <input type="checkbox" id="35" class="genre-checkbox" onchange="applyFilter()"><br>
+    
+    <label for="35">Crime</label>
+    <input type="checkbox" id="80" class="genre-checkbox" onchange="applyFilter()"><br>
+    <!-- Add other genre checkboxes here -->
+ 
+    <label for="thriller">Thriller</label>
+    <input type="checkbox" id="53" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+
+    <label for="documentary">Documentary</label>
+    <input type="checkbox" id="99" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+    <label for="Family">Family</label>
+    <input type="checkbox" id="10751" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+    <label for="scifi">Science Fiction</label>
+    <input type="checkbox" id="10765" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+
+    <label for="fantasy">Fantasy</label>
+    <input type="checkbox" id="10765" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+
+    <label for="horror">Horror</label>
+    <input type="checkbox" id="2911" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+    <label for="soap">Soap Operas</label>
+    <input type="checkbox" id="10766" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+    <label for="talk">Talk Shows</label>
+    <input type="checkbox" id="10767" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+    <label for="romance">Romance</label>
+    <input type="checkbox" id="10749" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+
+    <label for="mystery">Mystery</label>
+    <input type="checkbox" id="9648" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+    <label for="news">News</label>
+    <input type="checkbox" id="10763" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+    <label for="reality">Reality</label>
+    <input type="checkbox" id="10764" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+    <label for="war">War</label>
+    <input type="checkbox" id="10768" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+    <label for="western">Western</label>
+    <input type="checkbox" id="37" class="genre-checkbox" onchange="applyFilter()">
+    <br>
+    </div>
+    <!-- The container to display TV shows -->
+    <div id="result-container">
+        <!-- TV shows will be displayed here -->
+    </div>
+
+    <!-- Additional container to display TV show details -->
+    <div id="details-container">
+        <!-- TV show details will be displayed here -->
+    </div>
+
+    <script>
+        // Function to apply the filter when checkboxes are changed
+        async function applyFilter() {
+            // Initialize an empty array to store selected genres
+            var genres = [];
+
+            // Get all elements with the class "genre-checkbox"
+            var checkboxes = document.getElementsByClassName("genre-checkbox");
+
+            // Loop through all checkboxes
+            for (var i = 0; i < checkboxes.length; i++) {
+                // Check if the checkbox is checked
+                if (checkboxes[i].checked) {
+                    // If checked, add the checkbox's id (genre) to the genres array
+                    genres.push(checkboxes[i].id);
+                }
+            }
+
+            // Check if any genres are selected
+            if (genres.length > 0) {
+                try {
+                    // Make an API request to fetch TV show data based on selected genres using Axios
+                    const apiUrl = `https://api.themoviedb.org/3/discover/tv?api_key=cd8819123f6dc77e58caf47bd9b25c44&with_genres=${genres.join(',')}&page=1`;
+                    const response = await axios.get(apiUrl);
+                    const data = response.data;
+
+                    // Display the TV shows in the HTML element with id "result-container"
+                    displayTVShows(data.results);
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            } else {
+                // If no genres are selected, display a default message
+                document.getElementById("result-container").innerHTML = "Select a genre";
+            }
+        }
+
+        // Function to display TV shows in the result container
+        function displayTVShows(shows) {
+            const resultContainer = document.getElementById('result-container');
+            resultContainer.innerHTML = '';
+
+            if (shows.length > 0) {
+                const resultList = document.createElement('ul');
+                shows.forEach(show => {
+                    console.log('Genres for', show.name, ':', show.genre_ids);
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('tv-show-list-item');  
+                    listItem.innerHTML = `<br><br><img src="https://image.tmdb.org/t/p/w500${show.poster_path}" alt="${show.name}" style="width: 100px; height: 120px;"><br><br> ${show.name} <br><br> Overview: ${show.overview} <br><br> Original Language: ${show.original_language} <br><br> Original Title: ${show.original_name} <br><br> Popularity: ${show.popularity} <br><br> Vote Count: ${show.vote_count} <br><br> Vote Average: ${show.vote_average}<br><br>`;
+                    // Add a click event listener to each list item
+                    listItem.addEventListener('click', () => showDetails(show));
+                    resultList.appendChild(listItem);
+                });
+
+                resultContainer.appendChild(resultList);
+            } else {
+                resultContainer.innerHTML = 'No TV shows match the selected genres.';
+            }
+        }
+
+        // Function to display details of a TV show
+        function showDetails(show) {
+            const detailsContainer = document.getElementById('details-container');
+            detailsContainer.innerHTML = `
+                <h2>${show.name}</h2>
+                <p><strong>Genres:</strong> ${show.genre_ids.join(', ')}</p>
+                <p><strong>Overview:</strong> ${show.overview}</p>
+                <p><strong>Original Language:</strong> ${show.original_language}</p>
+                <p><strong>Popularity:</strong> ${show.popularity}</p>
+                <p><strong>Vote Average:</strong> ${show.vote_average}</p>
+                <p><strong>Vote Count:</strong> ${show.vote_count}</p>
+            `;
+        }
+    </script>
+</body>
+</html>

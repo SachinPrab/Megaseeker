@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Person</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="results.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="viewpersonstyles.css">
+</head>
+<body>
+    <nav>
+        <div class="navbar-container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-search"></i> Megaseeker
+            </a>
+        </div>
+    </nav>
+    <nav>
+        <form method="post" onsubmit="return performSearch()">
+            <div class="altsearchbar">
+                <label for="altsearchbar"></label>
+                <input type="text" id="altsearchbar" placeholder="Searching for a person? Look here.">
+                <button type="submit" id="altsearchbutton">
+                    Submit
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
+    </nav>
+
+    <div id="results-container"></div>
+
+    <script src="viewpersonresults.js"></script>
+</body>
+</html>
