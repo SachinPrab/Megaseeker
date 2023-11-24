@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const personName = urlParams.get('q'); // Assuming the person's name is passed as a query parameter
 
         // Fetch person data from the API endpoint
-        const response = await axios.get(`https://api.tvmaze.com/search/people?q=${personName}&embed=castcredits&embed=crewcredits`);
+        const response = await axios.get(`https://api.tvmaze.com/search/people?q=${personName}`);
         const searchResults = response.data;
 
         // Clear previous results
