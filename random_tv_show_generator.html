@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random TV Show Generator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* Add your custom styles here */
+        body {
+            text-align: center;
+            padding: 50px;
+        }
+
+        #show-details {
+            margin-top: 20px;
+        }
+        .home {
+            background-color:white;
+padding:10px;
+margin:10px;
+border: 2px solid black;
+border-radius:2px; 
+        }
+    </style>
+</head>
+<nav class="searchnav">
+    <div class="home"><a href="index.html">Back To Home Page</a></div>
+</nav>
+<body>
+    <h1>Random TV Show Generator</h1>
+    <button class="btn btn-primary" onclick="fetchRandomShow()">Shuffle</button>
+    <div id="show-details"></div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Your custom JavaScript -->
+    <script>
+        async function fetchRandomShow() {
+            const apiKey = '9ad6e393df1c4b0f1419750ed91640cd'; // Replace with your actual API key
+
+            try {
+                // Make an API request to fetch random TV show data
+                const apiUrl = `https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}`;
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                // Randomly select a show from the list
+                const randomIndex = Math.floor(Math.random() * data.results.length);
+                const randomShow = data.results[randomIndex];
+
+                // Display the show details
+                displayShowDetails(randomShow);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        function displayShowDetails(show) {
+            const showDetailsContainer = document.getElementById('show-details');
+            showDetailsContainer.innerHTML = `
+                <h2>${show.name}</h2>
+                <p><strong>Overview:</strong> ${show.overview}</p>
+                <p><strong>First Air Date:</strong> ${show.first_air_date}</p>
+                <p><strong>Popularity:</strong> ${show.popularity}</p>
+                <p><strong>Vote Average:</strong> ${show.vote_average}</p>
+                <p><strong>Vote Count:</strong> ${show.vote_count}</p>
+                <img src="https://image.tmdb.org/t/p/w500${show.poster_path}" alt="${show.name}" style="width: 200px; height: 300px;">
+            `;
+        }
+    </script>
+</body>
+
+</html>
