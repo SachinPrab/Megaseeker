@@ -14,7 +14,7 @@
     </nav>
 <h1>Must-Watch TV: Top Ratings</h1>
 <div id="tvShowsList"></div>
-
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 <script>
     // API endpoint for top-rated TV shows
     const apiUrl = 'https://api.themoviedb.org/3/tv/top_rated?api_key=9ad6e393df1c4b0f1419750ed91640cd';
@@ -47,8 +47,21 @@
             console.error('Error fetching top-rated TV shows:', error);
         }
     }
+    let mybutton = document.getElementById("myBtn");
 
-    // Call the function to fetch and display top-rated TV shows
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+function topFunction() {
+  document.body.scrollTop = 0; 
+  document.documentElement.scrollTop = 0;
+}
     fetchTopRatedTVShows();
 </script>
 

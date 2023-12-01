@@ -74,12 +74,13 @@
     </div>
     <!-- The container to display TV shows -->
     <div id="result-container">
-        <!-- TV shows will be displayed here -->
+        <!-- TV shows will be displayed here -->   
     </div>
 
     <!-- Additional container to display TV show details -->
     <div id="details-container">
         <!-- TV show details will be displayed here -->
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>   
     </div>
 
     <script>
@@ -155,6 +156,25 @@
                 <p><strong>Vote Count:</strong> ${show.vote_count}</p>
             `;
         }
+
+        let mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
     </script>
 </body>
 </html>

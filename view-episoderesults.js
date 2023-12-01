@@ -56,4 +56,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
       console.error('Error fetching episodes data:', error);
   }
+
 });
