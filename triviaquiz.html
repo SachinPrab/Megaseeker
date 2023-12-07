@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: rgb(255, 209, 0);
+  color: black;
+  font-size: 25px;
+}
+
+        #quiz-container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        #question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .option {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .option:hover {
+            background-color: #2980b9;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+        h1,h2 {
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+        }
+    </style>
+    <title>Pop Culture Trivia Quiz</title>
+</head>
+<body>
+    <h1>Welcome to the Megaseeker Pop Culture Quiz!</h1>
+    <h2>Embark on a journey through the whimsical realms of pop culture. Test your wits, because here, curiosity is your superpower! Welcome to the Megaseeker Pop Culture Quiz – Where Trivia Meets Triumphant Fun!</h2>
+    <div id="quiz-container">
+        <h2 id="question">Question goes here</h2>
+        <div class="options" id="options-container">
+            <!-- Options go here -->
+        </div>
+        <p id="result"></p>
+        <button id="next-btn" onclick="nextQuestion()">Next Question</button>
+        <button id="end-btn" onclick="endQuiz()">End Quiz</button>
+    </div>
+ 
+    <script>
+        const questions = [
+            {
+                question: 'What year did Friends first air on TV?',
+                options: ['1992', '1994', '1996', '1998'],
+                correctAnswer: '1994'
+            },
+            {
+                question: 'Who is the main character in Breaking Bad?',
+                options: ['Walter White', 'Jesse Pinkman', 'Saul Goodman', 'Skyler White'],
+                correctAnswer: 'Walter White'
+            },
+            {
+        question: 'In which year was the first episode of "The Simpsons" aired?',
+        options: ['1987', '1989', '1991', '1993'],
+        correctAnswer: '1989'
+    },
+    {
+        question: 'Who played the character of Jack Dawson in the movie "Titanic"?',
+        options: ['Leonardo DiCaprio', 'Brad Pitt', 'Matt Damon', 'Johnny Depp'],
+        correctAnswer: 'Leonardo DiCaprio'
+    },
+    {
+        question: 'What is the name of the wizarding school in the "Harry Potter" series?',
+        options: ['Hogwarts School of Witchcraft and Wizardry', 'Beauxbatons Academy of Magic', 'Durmstrang Institute', 'Ilvermorny School of Witchcraft and Wizardry'],
+        correctAnswer: 'Hogwarts School of Witchcraft and Wizardry'
+    },
+    {
+        question: 'Which actor portrayed Iron Man in the Marvel Cinematic Universe?',
+        options: ['Chris Evans', 'Chris Hemsworth', 'Robert Downey Jr.', 'Mark Ruffalo'],
+        correctAnswer: 'Robert Downey Jr.'
+    },
+    {
+        question: 'What is the real name of the character "Heisenberg" in the TV series "Breaking Bad"?',
+        options: ['Walter White', 'Jesse Pinkman', 'Saul Goodman', 'Skyler White'],
+        correctAnswer: 'Walter White'
+    },
+    {
+        question: 'In the movie "The Shawshank Redemption," what is Andy Dufresne\'s profession?',
+        options: ['Banker', 'Lawyer', 'Engineer', 'Police Officer'],
+        correctAnswer: 'Banker'
+    },
+    {
+        question: 'Who is the author of the "Game of Thrones" book series?',
+        options: ['George R.R. Martin', 'J.K. Rowling', 'J.R.R. Tolkien', 'Suzanne Collins'],
+        correctAnswer: 'George R.R. Martin'
+    },
+    {
+        question: 'What animated film features a character named Simba?',
+        options: ['Toy Story', 'Finding Nemo', 'The Lion King', 'Frozen'],
+        correctAnswer: 'The Lion King'
+    },
+ {
+        question: 'Which actress played the role of Katniss Everdeen in "The Hunger Games" series?',
+        options: ['Emma Watson', 'Jennifer Lawrence', 'Anne Hathaway', 'Scarlett Johansson'],
+        correctAnswer: 'Jennifer Lawrence'
+    },
+    {
+        question: 'In the TV show "Friends," what is the name of Ross and Monica\'s pet monkey?',
+        options: ['Jojo', 'Marcel', 'Charlie', 'Bubbles'],
+        correctAnswer: 'Marcel'
+    },
+    {
+        question: 'Who is the director of the film "Inception"?',
+        options: ['Christopher Nolan', 'Steven Spielberg', 'Quentin Tarantino', 'Martin Scorsese'],
+        correctAnswer: 'Christopher Nolan'
+    },
+    {
+        question: 'Which planet is known as the "Red Planet"?',
+        options: ['Venus', 'Mars', 'Jupiter', 'Saturn'],
+        correctAnswer: 'Mars'
+    },
+    {
+        question: 'What is the name of the ship in "Star Trek" captained by James T. Kirk?',
+        options: ['Enterprise', 'Voyager', 'Discovery', 'Defiant'],
+        correctAnswer: 'Enterprise'
+    },
+    {
+        question: 'Who is the creator of the animated series "SpongeBob SquarePants"?',
+        options: ['Matt Groening', 'Seth MacFarlane', 'Stephen Hillenburg', 'Mike Judge'],
+        correctAnswer: 'Stephen Hillenburg'
+    },
+    {
+        question: 'Which actor played the lead role in the movie "Forrest Gump"?',
+        options: ['Tom Hanks', 'Brad Pitt', 'Johnny Depp', 'Leonardo DiCaprio'],
+        correctAnswer: 'Tom Hanks'
+    },
+    {
+        question: 'In the TV series "Stranger Things," what is Eleven\'s real name?',
+        options: ['Elle', 'Maxine', 'Jane', 'Megan'],
+        correctAnswer: 'Jane'
+    },
+    {
+        question: 'What is the title of the first "Star Wars" film released in 1977?',
+        options: ['The Empire Strikes Back', 'Return of the Jedi', 'A New Hope', 'The Phantom Menace'],
+        correctAnswer: 'A New Hope'
+    },
+
+    {
+    question: 'In the TV series "Stranger Things," what is the name of the parallel dimension inhabited by the Demogorgon?',
+    options: ['The Upside Down', 'The Dark Zone', 'The Mirage Realm', 'The Other Side'],
+    correctAnswer: 'The Upside Down'
+},
+
+{
+    question: 'Who played the iconic character of James Bond in the 1990s?',
+    options: ['Pierce Brosnan', 'Sean Connery', 'Roger Moore', 'Timothy Dalton'],
+    correctAnswer: 'Pierce Brosnan'
+},
+
+{
+    question: 'Which Disney animated film features the song "Circle of Life"?',
+    options: ['Aladdin', 'The Little Mermaid', 'The Lion King', 'Beauty and the Beast'],
+    correctAnswer: 'The Lion King'
+},
+
+{
+    question: 'Who is the lead singer of the rock band Queen?',
+    options: ['Freddie Mercury', 'David Bowie', 'Mick Jagger', 'Elton John'],
+    correctAnswer: 'Freddie Mercury'
+},
+
+{
+    question: 'What is the name of the fictional African country in the Marvel Cinematic Universe ruled by T\'Challa?',
+    options: ['Zamunda', 'Genovia', 'Wakanda', 'Sokovia'],
+    correctAnswer: 'Wakanda'
+},
+
+{
+    question: 'Which actress portrayed Hermione Granger in the "Harry Potter" film series?',
+    options: ['Emma Stone', 'Emma Roberts', 'Emma Watson', 'Emma Thompson'],
+    correctAnswer: 'Emma Watson'
+},
+
+{
+    question: 'In the film "Forrest Gump," what is Forrest\'s unique skill that leads to his success?',
+    options: ['Chess', 'Running', 'Cooking', 'Painting'],
+    correctAnswer: 'Running'
+},
+
+{
+    question: 'What is the name of the fictional city where Batman operates?',
+    options: ['Gotham City', 'Metropolis', 'Central City', 'Star City'],
+    correctAnswer: 'Gotham City'
+},
+
+{
+    question: 'Which animated film features a character named Nemo who gets lost?',
+    options: ['Finding Nemo', 'The Little Mermaid', 'Shrek', 'Ratatouille'],
+    correctAnswer: 'Finding Nemo'
+},
+
+{
+    question: 'Who is known as the "Queen of Pop"?',
+    options: ['Britney Spears', 'Madonna', 'Lady Gaga', 'Beyoncé'],
+    correctAnswer: 'Madonna'
+},
+{
+    question: 'In the film "Blade Runner," what is the term used to describe bioengineered beings that are virtually identical to humans?',
+    options: ['Replicants', 'Synthetics', 'Androids', 'Cyborgs'],
+    correctAnswer: 'Replicants'
+},  
+// Add more questions as needed
+        ];
+
+        let currentQuestionIndex = 0;
+        let userScore = 0;
+
+        function loadQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById('question').textContent = currentQuestion.question;
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            currentQuestion.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.className = 'option';
+                button.addEventListener('click', () => checkAnswer(option));
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selectedOption) {
+            const currentQuestion = questions[currentQuestionIndex];
+            const resultElement = document.getElementById('result');
+
+            if (selectedOption === currentQuestion.correctAnswer) {
+                resultElement.textContent = 'Correct!';
+                userScore++;
+            } else {
+                resultElement.textContent = `Incorrect. The correct answer is: ${currentQuestion.correctAnswer}`;
+            }
+
+            // Disable options after the user has answered
+            document.querySelectorAll('.option').forEach(option => {
+                option.disabled = true;
+            });
+
+            // Show the next question button
+            document.getElementById('next-btn').style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+                resetQuizState();
+            } else {
+                endQuiz();
+            }
+        }
+
+        function resetQuizState() {
+            document.getElementById('result').textContent = '';
+            document.querySelectorAll('.option').forEach(option => {
+                option.disabled = false;
+            });
+            document.getElementById('next-btn').style.display = 'none';
+        }
+
+        function endQuiz() {
+    const quizContainer = document.getElementById('quiz-container');
+    quizContainer.innerHTML = `
+        <h2>Quiz Completed</h2>
+        <p>Your score: ${userScore} out of ${questions.length}</p>
+        <p>Well done! Thanks for playing.</p>
+        <button onclick="restartQuiz()">Try Again</button>
+        <button onclick="shareOnSocialMedia()">Share on Social Media</button>
+    `;
+}
+
+        function endQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            quizContainer.innerHTML = `
+                <h2>Quiz Completed</h2>
+                <p>Your score: ${userScore} out of ${questions.length}</p>
+                <button onclick="location.reload()">Restart Quiz</button>
+            `;
+        }
+
+      
+        // Load the first question
+        loadQuestion();
+    </script>
+</body>
+</html>

@@ -13,10 +13,9 @@
 </head>
 <body>
   <div class="topnav">
-    <a href="#news.html">News</a>
-    <a href="#about.html">About</a>
-    <a href="#termsandconditions.html">Terms And Conditions</a>
-    <a href="#contact.html">Contact</a>
+    <a href="about.html">About</a>
+    <a href="termsandconditions.html">Terms And Conditions</a>
+    <a href="contact.html">Contact</a>
     <a href="watchlist.html">My Watchlist</a>
     <a href="triviaquiz.html">Trivia Quiz</a>
   </div>
@@ -47,6 +46,8 @@
   <option value="genres">Genres</option>
   <option value="review">Reviews</option>
   <option value="ratings">Ratings</option>
+  <option value="popular">By Popularity</option>
+  <option value="onair">Airing Today</option>
   <option value="services">Streaming services</option>
 </select>
 <a href="random_tv_show_generator.html" class="btn btn-danger">Shuffle</a>
@@ -68,10 +69,17 @@
       case 'services':
         window.location.href = 'services.html';
         break;
+        case 'popular':
+          window.location.href = 'popularity.html';
+          break;
+          case 'onair':
+            window.location.href = 'onair.html';
+            
       default:
         alert('Please choose a valid filter.');
     }
   }
+
 </script>
     </form>
   </center>
