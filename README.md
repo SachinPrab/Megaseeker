@@ -31,3 +31,5 @@ No Login, No Signup – Just Instant TV Delight! 😊
 Enjoy the simplicity of Megaseeker – no need for signups or logins. Dive right into the world of TV without any fuss. Explore, discover, and indulge in your favorite shows effortlessly!
 
 Explore, Discover, and Enjoy the World of TV Shows with Megaseeker! 🍿🌟
+
+Note: Megaseeker does not currently support dark mode. 🌓 Explore TV with our vibrant, light-themed interface! 🌟📺
