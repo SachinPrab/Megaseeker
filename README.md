@@ -21,6 +21,7 @@ Entertainment Features:
 
 Test your TV show knowledge with our pop culture trivia quiz. Are you the ultimate TV buff?
 Embrace the element of surprise with our "Shuffle" page, introducing you to shows you might have missed.
+
 Filter Functionality:
 
 Find your perfect TV match! Filter shows based on popularity, rating, airing time, and more.
@@ -33,3 +34,10 @@ Enjoy the simplicity of Megaseeker – no need for signups or logins. Dive right
 Explore, Discover, and Enjoy the World of TV Shows with Megaseeker! 🍿🌟
 
 Note: Megaseeker does not currently support dark mode. 🌓 Explore TV with our vibrant, light-themed interface! 🌟📺
+
+## Getting Started:
+To run Megaseeker locally or contribute, follow these steps:
+
+1. Clone the repository.
+2. Install dependencies.
+3. Run the application.
